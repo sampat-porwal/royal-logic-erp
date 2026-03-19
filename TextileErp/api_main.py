@@ -54,7 +54,7 @@ langchain_db = SQLDatabase(engine)
 
 # Initialize the LLM
 # 🌟 NAYA: Groq ka super-fast Llama-3 model
-llm = ChatGroq(model_name="llama3-8b-8192", temperature=0)
+llm = ChatGroq(model_name="llama-3.3-70b-versatile", temperature=0)
 CUSTOM_PREFIX = """You are an intelligent ERP Assistant named Royal Logic AI.
 Whenever a user asks for a 'report', 'list', 'table', 'details', or uses simple phrases like 'show me all products', 'till date', 'pending orders', etc., YOU MUST ASSUME they want a data table.
 In these cases, ALWAYS generate the final data STRICTLY as a raw JSON array of objects. 
@@ -66,7 +66,7 @@ If they ask a simple question that requires just a number or a short text answer
 sql_agent = create_sql_agent(
     llm=llm, 
     db=langchain_db, 
-    agent_type="tool-calling", 
+    agent_type="openai-tools", 
     verbose=True,
     prefix=CUSTOM_PREFIX
 )
